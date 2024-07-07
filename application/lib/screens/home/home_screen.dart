@@ -7,6 +7,7 @@ import 'package:application/screens/home/notifiers/home_screen_notifier.dart';
 import 'package:application/screens/home/widgets/AccountInformation.dart';
 import 'package:application/screens/home/widgets/custom_home_screen_item.dart';
 import 'package:application/theme/theme.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sizer/sizer.dart';
@@ -32,11 +33,23 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
         }
       );
     }
+
+    BackButtonInterceptor.add(
+      (stopDefaultButtonEvent, info) async {
+        if(context.mounted) {
+          ref.read(signInSectionNotifier.notifier).notShowLoading();
+          Navigator.pushReplacementNamed(context, "/");
+        }
+          return true;
+      },
+      name: "backButtonInterceptorFunction"
+    );
   }
 
   @override
   void dispose() {
     PocketbaseConstants.pocketbaseObject.collection("accounts").unsubscribe();
+    BackButtonInterceptor.removeByName("backButtonInterceptorFunction");
     super.dispose();
   }
 

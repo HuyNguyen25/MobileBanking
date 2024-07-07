@@ -39,6 +39,7 @@ dependencies:
   flutter_riverpod: ^2.5.1
   sizer: ^2.0.15
   loading_animation_widget: ^1.2.1
+  back_button_interceptor: ^7.0.3
 
 dev_dependencies:
   flutter_test:

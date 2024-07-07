@@ -180,11 +180,42 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               SizedBox(height: 2.h),
               SizedBox(
                 height: 15.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomHomeScreenItem(title: "Debit", imagePath: ImageConstants.debitPath),
+                    CustomHomeScreenItem(title: "Debit", imagePath: ImageConstants.debitPath),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 5.w),
+                  Text(
+                    "Utility",
+                    style: CustomTextStyles.titleMedium,
+                  )
+                ],
+              ),
+              SizedBox(height: 2.h),
+              SizedBox(
+                height: 15.h,
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   children: [
-
+                    SizedBox(width: 2.w),
+                    CustomHomeScreenItem(title: "Deposit", imagePath: ImageConstants.depositPath),
+                    SizedBox(width: 4.w),
+                    CustomHomeScreenItem(title: "Finance", imagePath: ImageConstants.financePath),
+                    SizedBox(width: 4.w),
+                    CustomHomeScreenItem(title: "Credit Score", imagePath: ImageConstants.creditScorePath),
+                    SizedBox(width: 4.w),
+                    CustomHomeScreenItem(title: "ChatBot", imagePath: ImageConstants.chatBotPath),
+                    SizedBox(width: 4.w),
+                    CustomHomeScreenItem(title: "More", imagePath: ImageConstants.morePath),
+                    SizedBox(width: 2.w)
                   ],
                 ),
               ),

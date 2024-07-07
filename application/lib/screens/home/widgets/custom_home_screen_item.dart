@@ -7,18 +7,23 @@ class CustomHomeScreenItem extends StatelessWidget {
     Key? key,
     required this.title,
     required this.imagePath,
-    this.onTap
+    this.onTap,
+    this.height,
+    this.width,
   }) : super(key: key);
 
   String imagePath;
   VoidCallback? onTap;
   String title;
+  double? height;
+  double? width;
+
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 14.h,
-      width: 12.h,
+      height: height ?? 14.h,
+      width: width ?? 12.h,
       child: Column(
         children: [
           Container(
@@ -37,16 +42,19 @@ class CustomHomeScreenItem extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(3),
               child: IconButton(
-                icon: Image.asset(
-                  imagePath,
-                  fit: BoxFit.fill,
+                icon: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 onPressed: onTap,
               ),
             ),
           ),
           SizedBox(height: 1.5,),
-          Text(title, style: TextStyle(fontWeight: FontWeight.w600))
+          Text(title, style: TextStyle(fontWeight: FontWeight.w600), textAlign: TextAlign.center)
         ],
       )
     );

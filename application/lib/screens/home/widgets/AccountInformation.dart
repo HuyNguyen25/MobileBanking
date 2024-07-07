@@ -22,6 +22,14 @@ class AccountInformation extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints.tight(Size.fromWidth(80.w)),
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              spreadRadius: 3,
+              blurRadius: 2,
+              offset: Offset(2,3)
+            )
+          ],
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
             begin: Alignment.topLeft,

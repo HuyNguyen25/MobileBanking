@@ -28,7 +28,16 @@ class CustomHomeScreenItem extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  spreadRadius: 1.5,
+                  blurRadius: 5,
+                  offset: Offset(1,2)
+                )
+              ],
               borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.black),
               gradient: SweepGradient(
                 colors: [
                   Colors.grey,

@@ -67,7 +67,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
   PreferredSizeWidget _buildHomeScreenAppBar(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(Icons.logout),
+        icon: Icon(Icons.logout, color: CustomColors.gray900),
         onPressed: () async {
           if(context.mounted) {
             ref.read(signInSectionNotifier.notifier).notShowLoading();
@@ -79,19 +79,19 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
         preferredSize: Size.fromHeight(3),
         child: Container(
           height: 3,
-          color: Colors.black45
+          color: Colors.black
         ),
       ),
       title: Text("eBanking", style: CustomTextStyles.titleMedium.copyWith(color: CustomColors.gray900)),
       actions: [
         IconButton(
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.search, color: CustomColors.gray900),
           onPressed: () async {
 
           },
         ),
         IconButton(
-          icon: Icon(Icons.mail),
+          icon: Icon(Icons.mail, color: CustomColors.gray900),
           onPressed: () async {
 
           },
@@ -110,8 +110,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 2.h),
-              SizedBox(height: 3.h),
+              SizedBox(height: 5.h),
               AccountInformation(
                 accountId: user!.accountId,
                 accountName: user!.name,
@@ -197,7 +196,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomHomeScreenItem(title: "Debit", imagePath: ImageConstants.debitPath),
-                    CustomHomeScreenItem(title: "Debit", imagePath: ImageConstants.debitPath),
+                    CustomHomeScreenItem(title: "Credit", imagePath: ImageConstants.creditPath),
                   ],
                 ),
               ),
@@ -221,7 +220,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                     SizedBox(width: 2.w),
                     CustomHomeScreenItem(title: "Deposit", imagePath: ImageConstants.depositPath),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "Finance", imagePath: ImageConstants.financePath),
+                    CustomHomeScreenItem(title: "Statements", imagePath: ImageConstants.financePath),
                     SizedBox(width: 4.w),
                     CustomHomeScreenItem(title: "Credit Score", imagePath: ImageConstants.creditScorePath),
                     SizedBox(width: 4.w),

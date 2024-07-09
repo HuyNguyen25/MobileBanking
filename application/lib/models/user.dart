@@ -14,6 +14,6 @@ class User {
   String password;
   String accountId;
   String name;
-  int balance;
+  double balance;
   List<String> contactIds;
 }

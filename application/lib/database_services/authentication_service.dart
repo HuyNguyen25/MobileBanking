@@ -21,7 +21,7 @@ class AuthenticationService {
           password: item.getDataValue("password"),
           accountId: item.getDataValue("account_id"),
           name: item.getDataValue("name"),
-          balance: item.getIntValue("balance"),
+          balance: item.getDoubleValue("balance"),
           contactIds: contactsList
         );
       }

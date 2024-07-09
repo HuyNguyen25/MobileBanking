@@ -5,31 +5,43 @@ class CustomTextStyles {
   static TextStyle headlineSmall = TextStyle(
       color: CustomColors.gray900,
       fontSize: 24.sp,
-      fontWeight: FontWeight.w700
+      fontWeight: FontWeight.w700,
+      fontFamily: "Urbanist"
   );
 
   static TextStyle labelMedium = TextStyle(
       color: CustomColors.gray900,
       fontSize: 10.sp,
-      fontWeight: FontWeight.w600
+      fontWeight: FontWeight.w600,
+      fontFamily: "Urbanist"
+  );
+
+  static TextStyle labelLarge = TextStyle(
+      color: CustomColors.gray900,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w600,
+      fontFamily: "Urbanist"
   );
 
   static TextStyle titleLarge = TextStyle(
       color: CustomColors.gray900,
       fontSize: 20.sp,
-      fontWeight: FontWeight.w700
+      fontWeight: FontWeight.w700,
+      fontFamily: "Urbanist"
   );
 
   static TextStyle titleMedium = TextStyle(
       color: CustomColors.gray900,
       fontSize: 18.sp,
-      fontWeight: FontWeight.w700
+      fontWeight: FontWeight.w700,
+      fontFamily: "Urbanist"
   );
 
   static TextStyle titleSmall = TextStyle(
       color: CustomColors.gray700,
       fontSize: 14.sp,
-      fontWeight: FontWeight.w500
+      fontWeight: FontWeight.w500,
+      fontFamily: "Urbanist"
   );
 }
 

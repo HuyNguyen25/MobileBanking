@@ -1,10 +1,10 @@
-import 'package:application/constants/image_constants.dart';
 import 'package:application/screens/authentication/sign_in/sign_in_section.dart';
 import 'package:application/screens/authentication/sign_up/sign_up_section.dart';
 import 'package:application/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 ///AuthenticationScreen contains SignInSection and SignUpSection in a tab view
@@ -39,15 +39,22 @@ class AuthenticationState extends ConsumerState<AuthenticationScreen> with Singl
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  ImageConstants.logoPath,
-                  height: 30.h,
-                  width: 70.w,
-                  fit: BoxFit.fill,
+                SizedBox(height: 5.h),
+                Icon(
+                  FontAwesomeIcons.globe,
+                  size: 20.h
+                ),
+                SizedBox(height: 1.h),
+                Text(
+                  "eBanking",
+                  style: CustomTextStyles.headlineSmall,
                 ),
                 SizedBox(height: 1.h),
                 TabBar(
                   controller: tabController,
+                  labelStyle: CustomTextStyles.titleSmall.copyWith(
+                    fontSize: 10.sp
+                  ),
                   tabs: [
                     Tab(
                       icon: Icon(Icons.login),

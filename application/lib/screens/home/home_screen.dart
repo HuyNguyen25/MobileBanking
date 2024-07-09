@@ -10,6 +10,8 @@ import 'package:application/theme/theme.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pocketbase/pocketbase.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -20,12 +22,14 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class HomeScreenState extends ConsumerState<HomeScreen> {
+  final pb = PocketBase('http://10.0.2.2:8090');
+
   @override
   void initState() {
     super.initState();
     User? currentUser = ref.read(homeScreenNotifier);
     if(currentUser != null) {
-      PocketbaseConstants.pocketbaseObject.collection("accounts").subscribe(
+      pb.collection("accounts").subscribe(
         currentUser.id,
         (e) async {
           final result = await SynchronizationService.getCurrentUserUpdate(id: currentUser.id);
@@ -42,14 +46,14 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
         }
           return true;
       },
-      name: "backButtonInterceptorFunction"
+      name: "backButtonInterceptorFunctionForHomeScreen"
     );
   }
 
   @override
   void dispose() {
-    PocketbaseConstants.pocketbaseObject.collection("accounts").unsubscribe();
-    BackButtonInterceptor.removeByName("backButtonInterceptorFunction");
+    pb.collection("accounts").unsubscribe();
+    BackButtonInterceptor.removeByName("backButtonInterceptorFunctionForHomeScreen");
     super.dispose();
   }
 
@@ -110,7 +114,18 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 5.h),
+              SizedBox(height: 1.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 5.w),
+                  Text(
+                    "Welcome Back!",
+                    style: CustomTextStyles.titleMedium,
+                  )
+                ],
+              ),
+              SizedBox(height: 2.h),
               AccountInformation(
                 accountId: user!.accountId,
                 accountName: user!.name,
@@ -129,21 +144,21 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               SizedBox(height: 2.h),
               SizedBox(
-                height: 15.h,
+                height: 16.h,
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   children: [
                     SizedBox(width: 2.w),
-                    CustomHomeScreenItem(title: "Pay Bills", imagePath: ImageConstants.payBillsPath),
+                    CustomHomeScreenItem(title: "Pay Bills", iconData: FontAwesomeIcons.receipt),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "Pay Taxes", imagePath: ImageConstants.payTaxesPath),
+                    CustomHomeScreenItem(title: "Pay Taxes", iconData: FontAwesomeIcons.flagUsa),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "QR", imagePath: ImageConstants.qrPath),
+                    CustomHomeScreenItem(title: "QR", iconData: FontAwesomeIcons.qrcode),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "Stock", imagePath: ImageConstants.stockPath),
+                    CustomHomeScreenItem(title: "Stock", iconData: FontAwesomeIcons.arrowTrendUp),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "More", imagePath: ImageConstants.morePath),
+                    CustomHomeScreenItem(title: "More", iconData: FontAwesomeIcons.ellipsis),
                     SizedBox(width: 2.w)
                   ],
                 ),
@@ -160,21 +175,27 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               SizedBox(height: 2.h),
               SizedBox(
-                height: 15.h,
+                height: 16.h,
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   children: [
                     SizedBox(width: 2.w),
-                    CustomHomeScreenItem(title: "Money Transfer", imagePath: ImageConstants.moneyTransferPath),
+                    CustomHomeScreenItem(title: "Money Transfer", iconData: FontAwesomeIcons.moneyBillTransfer,
+                      onTap: () async {
+                        if(context.mounted) {
+                          Navigator.pushReplacementNamed(context, "/moneyTransferScreen");
+                        }
+                      },
+                    ),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "Apple Wallet", imagePath: ImageConstants.applePayPath),
+                    CustomHomeScreenItem(title: "Apple Wallet", iconData: FontAwesomeIcons.applePay),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "PayPal", imagePath: ImageConstants.paypalPath),
+                    CustomHomeScreenItem(title: "PayPal", iconData: FontAwesomeIcons.paypal),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "Google Wallet", imagePath: ImageConstants.googleWalletPath),
+                    CustomHomeScreenItem(title: "Google Wallet", iconData: FontAwesomeIcons.googleWallet),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "More", imagePath: ImageConstants.morePath),
+                    CustomHomeScreenItem(title: "More", iconData: FontAwesomeIcons.ellipsis),
                     SizedBox(width: 2.w)
                   ],
                 ),
@@ -191,12 +212,12 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               SizedBox(height: 2.h),
               SizedBox(
-                height: 15.h,
+                height: 16.h,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CustomHomeScreenItem(title: "Debit", imagePath: ImageConstants.debitPath),
-                    CustomHomeScreenItem(title: "Credit", imagePath: ImageConstants.creditPath),
+                    CustomHomeScreenItem(title: "Debit", iconData: FontAwesomeIcons.solidCreditCard),
+                    CustomHomeScreenItem(title: "Credit", iconData: FontAwesomeIcons.creditCard),
                   ],
                 ),
               ),
@@ -212,21 +233,21 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               SizedBox(height: 2.h),
               SizedBox(
-                height: 15.h,
+                height: 16.h,
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   children: [
                     SizedBox(width: 2.w),
-                    CustomHomeScreenItem(title: "Deposit", imagePath: ImageConstants.depositPath),
+                    CustomHomeScreenItem(title: "Deposit", iconData: FontAwesomeIcons.piggyBank),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "Statements", imagePath: ImageConstants.financePath),
+                    CustomHomeScreenItem(title: "Statements", iconData: FontAwesomeIcons.fileInvoice),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "Credit Score", imagePath: ImageConstants.creditScorePath),
+                    CustomHomeScreenItem(title: "Credit Score", iconData: FontAwesomeIcons.star),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "ChatBot", imagePath: ImageConstants.chatBotPath),
+                    CustomHomeScreenItem(title: "ChatBot", iconData: FontAwesomeIcons.robot),
                     SizedBox(width: 4.w),
-                    CustomHomeScreenItem(title: "More", imagePath: ImageConstants.morePath),
+                    CustomHomeScreenItem(title: "More", iconData: FontAwesomeIcons.ellipsis),
                     SizedBox(width: 2.w)
                   ],
                 ),

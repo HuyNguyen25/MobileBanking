@@ -36,6 +36,7 @@ class SignInSectionState extends ConsumerState<SignInSection> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextFormField(
+                    style: CustomTextStyles.titleSmall,
                     decoration: CustomTextFieldStyles.accountIdTextFieldDecoration,
                     onChanged: (value) {
                       setState(() {
@@ -50,6 +51,7 @@ class SignInSectionState extends ConsumerState<SignInSection> {
                   ),
                   SizedBox(height: 1.h),
                   TextFormField(
+                    style: CustomTextStyles.titleSmall,
                     decoration: CustomTextFieldStyles.passwordTextFieldDecoration,
                     onChanged: (value) {
                       setState(() {
@@ -92,7 +94,7 @@ class SignInSectionState extends ConsumerState<SignInSection> {
                           }
                         },
                         style: TextButton.styleFrom(
-                          backgroundColor: Colors.black45,
+                          backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)
                           )
@@ -124,8 +126,8 @@ class SignInSectionState extends ConsumerState<SignInSection> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Error!"),
-        content: Text("Account ID or password may be incorrect."),
+        title: Text("Error!", style: CustomTextStyles.titleMedium),
+        content: Text("Account ID or password may be incorrect.", style: CustomTextStyles.titleSmall),
       )
     );
   }

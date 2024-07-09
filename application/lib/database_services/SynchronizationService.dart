@@ -1,6 +1,5 @@
 import 'package:application/constants/pocketbase.dart';
 import 'package:application/models/user.dart';
-import 'package:pocketbase/pocketbase.dart';
 
 class SynchronizationService {
   //fetch current user data
@@ -22,7 +21,7 @@ class SynchronizationService {
         password: result.getDataValue("password"),
         accountId: result.getDataValue("account_id"),
         name: result.getDataValue("name"),
-        balance: result.getIntValue("balance"),
+        balance: result.getDoubleValue("balance"),
         contactIds: contactsList
     );
   }

@@ -16,7 +16,7 @@ class CoreService {
   static Future<void> transferMoney({
     required String sourceAccountId,
     required String destinationAccountId,
-    required int amountOfMoney
+    required double amountOfMoney
   }) async {
     final sourceRecord = await PocketbaseConstants.pocketbaseObject
         .collection("accounts").getOne(sourceAccountId);
@@ -27,14 +27,14 @@ class CoreService {
     await PocketbaseConstants.pocketbaseObject.collection("accounts").update(
       sourceAccountId,
       body: {
-        "balance": sourceRecord.getIntValue("balance") - amountOfMoney
+        "balance": sourceRecord.getDoubleValue("balance") - amountOfMoney
       }
     );
 
     await PocketbaseConstants.pocketbaseObject.collection("accounts").update(
         destinationAccountId,
         body: {
-          "balance": destinationRecord.getIntValue("balance") + amountOfMoney
+          "balance": destinationRecord.getDoubleValue("balance") + amountOfMoney
         }
     );
   }

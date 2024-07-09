@@ -1,5 +1,6 @@
 import 'package:application/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 class AccountInformation extends StatelessWidget {
@@ -47,7 +48,7 @@ class AccountInformation extends StatelessWidget {
           children: [
             Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 5.w, top: 5.w),
@@ -57,6 +58,10 @@ class AccountInformation extends StatelessWidget {
                       color: Colors.white
                     ),
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5.w, right: 5.w),
+                  child: Icon(FontAwesomeIcons.circleInfo, color: Colors.white),
                 )
               ],
             ),
@@ -88,6 +93,14 @@ class AccountInformation extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(height: 3.w),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(FontAwesomeIcons.ccVisa, color: Colors.white),
+                SizedBox(width: 5.w)
+              ],
+            )
           ],
         ),
       ),

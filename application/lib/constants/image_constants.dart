@@ -1,5 +1,5 @@
 class ImageConstants {
-  static final assetPath = 'asset';
+  static final assetPath = 'asset/images';
   static final logoPath = '$assetPath/img_logo.png';
   static final applePayPath = '$assetPath/img_apple_pay.png';
   static final qrPath = '$assetPath/img_qr.png';

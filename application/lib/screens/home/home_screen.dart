@@ -30,9 +30,9 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
     User? currentUser = ref.read(homeScreenNotifier);
     if(currentUser != null) {
       pb.collection("accounts").subscribe(
-        currentUser.id,
+        currentUser.accountId,
         (e) async {
-          final result = await SynchronizationService.getCurrentUserUpdate(id: currentUser.id);
+          final result = await SynchronizationService.getCurrentUserUpdate(accountId: currentUser.accountId);
           ref.read(homeScreenNotifier.notifier).changeUser(result);
         }
       );

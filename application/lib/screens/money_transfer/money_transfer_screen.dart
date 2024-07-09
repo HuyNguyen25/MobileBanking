@@ -24,14 +24,13 @@ class MoneyTransferScreenState extends ConsumerState<MoneyTransferScreen> {
 
   @override
   void initState() {
-    print("money transfer init");
     super.initState();
     User? currentUser = ref.read(moneyTransferScreenNotifier);
     if(currentUser != null) {
       pb.collection("accounts").subscribe(
-        currentUser.id,
+        currentUser.accountId,
         (e) async {
-          final result = await SynchronizationService.getCurrentUserUpdate(id: currentUser.id);
+          final result = await SynchronizationService.getCurrentUserUpdate(accountId: currentUser.accountId);
           ref.read(homeScreenNotifier.notifier).changeUser(result);
         }
       );
@@ -50,7 +49,6 @@ class MoneyTransferScreenState extends ConsumerState<MoneyTransferScreen> {
 
   @override
   void dispose() {
-    print("money transfer dispose");
     pb.collection("accounts").unsubscribe();
     BackButtonInterceptor.removeByName("backButtonInterceptorFunctionForMoneyTransferScreen");
     super.dispose();

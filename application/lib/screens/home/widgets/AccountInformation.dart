@@ -68,7 +68,7 @@ class AccountInformation extends StatelessWidget {
             SizedBox(height: 5.w),
             Row(
               children: [
-                SizedBox(width: 10.w),
+                SizedBox(width: 6.w),
                 Icon(Icons.perm_identity, color: Colors.white,),
                 SizedBox(width: 8),
                 Text(
@@ -82,7 +82,7 @@ class AccountInformation extends StatelessWidget {
             SizedBox(height: 3.w),
             Row(
               children: [
-                SizedBox(width: 10.w),
+                SizedBox(width: 6.w),
                 Icon(Icons.account_balance, color: Colors.white,),
                 SizedBox(width: 8),
                 Text(

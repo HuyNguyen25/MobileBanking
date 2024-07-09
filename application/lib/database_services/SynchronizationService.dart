@@ -3,9 +3,9 @@ import 'package:application/models/user.dart';
 
 class SynchronizationService {
   //fetch current user data
-  static Future<User> getCurrentUserUpdate({required String id}) async {
+  static Future<User> getCurrentUserUpdate({required String accountId}) async {
     final result = await PocketbaseConstants.pocketbaseObject
-        .collection("accounts").getOne(id, expand: "contacts");
+        .collection("accounts").getOne(accountId, expand: "contacts");
 
     final contactsList = <String>[];
 
@@ -16,10 +16,9 @@ class SynchronizationService {
     }
 
     return User(
-        id: result.id,
         email: result.getDataValue("email"),
         password: result.getDataValue("password"),
-        accountId: result.getDataValue("account_id"),
+        accountId: result.id,
         name: result.getDataValue("name"),
         balance: result.getDoubleValue("balance"),
         contactIds: contactsList

@@ -1,6 +1,5 @@
 class User {
   User({
-  required this.id,
   required this.email,
   required this.password,
   required this.accountId,
@@ -9,7 +8,6 @@ class User {
   required this.contactIds
   });
 
-  String id;
   String email;
   String password;
   String accountId;

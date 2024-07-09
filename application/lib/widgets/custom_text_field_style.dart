@@ -23,7 +23,7 @@ class CustomTextFieldStyles {
   );
 
   static final destinationAccountIdTextFieldDecoration = accountIdTextFieldDecoration.copyWith(
-    icon: Icon(Icons.person, color: Colors.white),
+    icon: Icon(Icons.perm_identity, color: Colors.white),
     hintText: "Destination Account ID",
     hintStyle: CustomTextStyles.titleSmall.copyWith(
       color: Colors.white

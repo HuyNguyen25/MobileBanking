@@ -44,7 +44,7 @@ class SignInSectionState extends ConsumerState<SignInSection> {
                       });
                     },
                     validator: (value) {
-                      if(value == null || value.length != 10)
+                      if(value == null || value.length != 15)
                         return "Account ID is invalid!";
                       return null;
                     },

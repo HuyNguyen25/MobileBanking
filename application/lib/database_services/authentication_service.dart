@@ -3,31 +3,34 @@ import 'package:application/models/user.dart';
 
 class AuthenticationService {
   static Future<User?> signIn ({required String accountId, required String password}) async {
-    final records = await PocketbaseConstants.pocketbaseObject.collection('accounts').getFullList(expand: "contacts");
-    for(final item in records) {
-      if(item.getDataValue("account_id") == accountId && item.getDataValue("password") == password) {
+    try{
+      final record = await PocketbaseConstants.pocketbaseObject.collection('accounts').getOne(accountId, expand: "contacts");
+
+      if(record.getDataValue("password") == password) {
         final contactsList = <String>[];
 
-        if(item.expand["contacts"] != null) {
-          for(final contactId in item.expand["contacts"]!) {
+        if(record.expand["contacts"] != null) {
+          for(final contactId in record.expand["contacts"]!) {
             contactsList.add(contactId.id);
           }
         }
 
         //Indicates signing in successfully
         return User(
-          id: item.id,
-          email: item.getDataValue("email"),
-          password: item.getDataValue("password"),
-          accountId: item.getDataValue("account_id"),
-          name: item.getDataValue("name"),
-          balance: item.getDoubleValue("balance"),
+          email: record.getDataValue("email"),
+          password: record.getDataValue("password"),
+          accountId: record.id,
+          name: record.getDataValue("name"),
+          balance: record.getDoubleValue("balance"),
           contactIds: contactsList
         );
       }
+      return null;
     }
 
-    return null; //Indicates signing in not successfully
+    catch(e) {
+      return null; //Indicates signing in not successfully
+    }
   }
 
   static Future<bool> changePassword({required String accountId, required String oldPassword, required String newPassword}) async {

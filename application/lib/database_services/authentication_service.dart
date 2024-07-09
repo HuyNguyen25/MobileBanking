@@ -4,17 +4,9 @@ import 'package:application/models/user.dart';
 class AuthenticationService {
   static Future<User?> signIn ({required String accountId, required String password}) async {
     try{
-      final record = await PocketbaseConstants.pocketbaseObject.collection('accounts').getOne(accountId, expand: "contacts");
+      final record = await PocketbaseConstants.pocketbaseObject.collection('accounts').getOne(accountId);
 
       if(record.getDataValue("password") == password) {
-        final contactsList = <String>[];
-
-        if(record.expand["contacts"] != null) {
-          for(final contactId in record.expand["contacts"]!) {
-            contactsList.add(contactId.id);
-          }
-        }
-
         //Indicates signing in successfully
         return User(
           email: record.getDataValue("email"),
@@ -22,7 +14,7 @@ class AuthenticationService {
           accountId: record.id,
           name: record.getDataValue("name"),
           balance: record.getDoubleValue("balance"),
-          contactIds: contactsList
+          contactIds: record.getDataValue("contacts")
         );
       }
       return null;

@@ -1,5 +1,4 @@
-import 'package:application/constants/pocketbase.dart';
-import 'package:application/database_services/SynchronizationService.dart';
+import 'package:application/database_services/synchronization_service.dart';
 import 'package:application/models/user.dart';
 import 'package:application/screens/home/notifiers/home_screen_notifier.dart';
 import 'package:application/screens/home/widgets/AccountInformation.dart';

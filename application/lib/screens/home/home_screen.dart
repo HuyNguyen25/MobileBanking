@@ -1,6 +1,6 @@
 import 'package:application/constants/image_constants.dart';
 import 'package:application/constants/pocketbase.dart';
-import 'package:application/database_services/SynchronizationService.dart';
+import 'package:application/database_services/synchronization_service.dart';
 import 'package:application/models/user.dart';
 import 'package:application/screens/authentication/sign_in/notifiers/sign_in_section_notifier.dart';
 import 'package:application/screens/home/notifiers/home_screen_notifier.dart';

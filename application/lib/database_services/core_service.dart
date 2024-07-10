@@ -1,4 +1,5 @@
 import 'package:application/constants/pocketbase.dart';
+import 'package:application/models/transaction.dart';
 
 /// Money transfer, getting and adding contacts, get account name for money transfer confirmation
 class CoreService {
@@ -51,5 +52,16 @@ class CoreService {
       return true;
     }
     return false;
+  }
+
+  static Future<void> addTransaction({required Transaction transaction}) async {
+    final record = await PocketbaseConstants.pocketbaseObject.collection("transactions").create(
+      body: {
+        "source_account_id": transaction.sourceAccountId,
+        "destination_account_id": transaction.destinationAccountId,
+        "details": transaction.details,
+        "amount_of_money": transaction.amountOfMoney
+      }
+    );
   }
 }

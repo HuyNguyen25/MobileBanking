@@ -1,4 +1,5 @@
 import 'package:application/database_services/core_service.dart';
+import 'package:application/models/transaction.dart';
 import 'package:application/screens/money_transfer/notifiers/money_transfer_screen_notifier.dart';
 import 'package:application/screens/money_transfer/widgets/destination_account_information/models/destination_account_information_model.dart';
 import 'package:application/theme/theme.dart';
@@ -188,6 +189,18 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
                     sourceAccountId: user!.accountId,
                     destinationAccountId: destinationAccountInformationModel.destinationAccountId,
                     amountOfMoney: double.parse(destinationAccountInformationModel.amountOfTransferMoney)
+                  );
+                  
+                  //add the transaction to transactions database
+                  await CoreService.addTransaction(
+                    transaction: Transaction(
+                      sourceAccountId: user!.accountId,
+                      destinationAccountId: destinationAccountInformationModel.destinationAccountId,
+                      details: "\$${destinationAccountInformationModel.amountOfTransferMoney} from ${user!.name} to "
+                          "${destinationAccountInformationModel.destinationAccountName} - title: "
+                          "\"${destinationAccountInformationModel.title}\".",
+                      amountOfMoney: double.parse(destinationAccountInformationModel.amountOfTransferMoney)
+                    )
                   );
 
                   //hide transfer confirmation

@@ -38,4 +38,9 @@ class CustomTextFieldStyles {
     hintText: "Amount of Money",
     icon: Icon(Icons.monetization_on_sharp, color: Colors.white),
   );
+
+  static final transferTitleTextFieldDecoration = destinationAccountIdTextFieldDecoration.copyWith(
+    hintText: "Title (< 100 characters)",
+    icon: Icon(Icons.title, color: Colors.white)
+  );
 }

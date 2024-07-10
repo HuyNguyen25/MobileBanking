@@ -21,7 +21,7 @@ class CustomHomeScreenItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 15.h,
+      //height: height ?? 15.h,
       width: width ?? 12.h,
       child: Column(
         children: [

@@ -4,11 +4,13 @@ class DestinationAccountInformationModel {
     required this.destinationAccountName,
     required this.amountOfTransferMoney,
     required this.date,
+    required this.title,
     required this.destinationAccountNameVisibility
   });
   String destinationAccountId;
   String destinationAccountName;
   String amountOfTransferMoney;
-  DateTime? date;
+  String date;
+  String title;
   bool destinationAccountNameVisibility;
 }

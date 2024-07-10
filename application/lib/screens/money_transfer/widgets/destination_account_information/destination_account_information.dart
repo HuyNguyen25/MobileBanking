@@ -23,7 +23,8 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
     destinationAccountId: "",
     destinationAccountName: "",
     amountOfTransferMoney: "",
-    date: null,
+    date: "",
+    title: "",
     destinationAccountNameVisibility: false
   );
 
@@ -33,9 +34,8 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
 
     return SizedBox(
       width: 80.w,
-      height: 80.w,
+      //height: 80.w,
       child: Container(
-        constraints: BoxConstraints.tight(Size.fromWidth(80.w)),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -61,6 +61,7 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: EdgeInsets.only(top:5.w, left: 5.w, right: 5.w),
@@ -71,6 +72,8 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
                   decoration: CustomTextFieldStyles.destinationAccountIdTextFieldDecoration,
                   onChanged: (value) {
                     setState(() {
+                      destinationAccountInformationModel
+                        .destinationAccountNameVisibility = false;
                       destinationAccountInformationModel
                         .destinationAccountId = value;
                     });
@@ -91,6 +94,8 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
                   decoration: CustomTextFieldStyles.amountOfTransferMoneyTextFieldDecoration,
                   onChanged: (value) {
                     setState(() {
+                      destinationAccountInformationModel
+                        .destinationAccountNameVisibility = false;
                       destinationAccountInformationModel
                         .amountOfTransferMoney = value;
                     });
@@ -147,6 +152,24 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
               ) : Container(height: 0),
               SizedBox(height: 1.2.w),
               destinationAccountInformationModel.destinationAccountNameVisibility ?
+              TextFormField(
+                style: CustomTextStyles.titleSmall.copyWith(
+                  color: Colors.white
+                ),
+                decoration: CustomTextFieldStyles.transferTitleTextFieldDecoration,
+                onChanged: (value) {
+                  setState(() {
+                    destinationAccountInformationModel.title = value;
+                  });
+                },
+                validator: (value) {
+                  if(value!= null && value.length > 100)
+                    return "Title is too long!";
+                  return null;
+                },
+              ) : Container(height: 0),
+              SizedBox(height: 1.2.w),
+              destinationAccountInformationModel.destinationAccountNameVisibility ?
               TextButton(
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.black
@@ -158,6 +181,9 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
                   ),
                 ),
                 onPressed: () async {
+                  if(!_formKey.currentState!.validate())
+                    return;
+
                   await CoreService.transferMoney(
                     sourceAccountId: user!.accountId,
                     destinationAccountId: destinationAccountInformationModel.destinationAccountId,
@@ -166,14 +192,14 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
 
                   //hide transfer confirmation
                   setState(() {
-                    destinationAccountInformationModel.destinationAccountNameVisibility = false;
-                    destinationAccountInformationModel.date = DateTime.now();
+                    destinationAccountInformationModel.date = DateFormat.yMMMMd('en_US').add_jm().format(DateTime.now());
                   });
 
                   //show dialog indicating a successful transfer
                   await _showSucessfulTransferDialog();
                 },
-              ) : Container(height: 0)
+              ) : Container(height: 0),
+              SizedBox(height: 5.w),
             ]
           ),
         ),
@@ -194,14 +220,31 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
   Future<void> _showSucessfulTransferDialog() async {
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) => AlertDialog(
             title: Text("Transfer Completed", style: CustomTextStyles.titleMedium),
             content: Text(
               "\$${destinationAccountInformationModel.amountOfTransferMoney} to "
                   "${destinationAccountInformationModel.destinationAccountId} (${destinationAccountInformationModel.destinationAccountName}) "
-                  "at ${DateFormat.yMMMMd('en_US').add_jm().format(destinationAccountInformationModel.date!) }",
+                  "at ${destinationAccountInformationModel.date} -"
+                  " title: ${destinationAccountInformationModel.title}.",
               style: CustomTextStyles.titleSmall
+            ),
+          actions: [
+            TextButton(
+              child: Text("Dismiss", style: CustomTextStyles.titleMedium.copyWith(fontSize: 14.sp)),
+              onPressed: () async {
+                //reset model to initial state, except receiver's ID and amount of transfer money
+                setState(() {
+                  destinationAccountInformationModel.destinationAccountNameVisibility = false;
+                  destinationAccountInformationModel.title = "";
+                  destinationAccountInformationModel.date = "";
+                  destinationAccountInformationModel.destinationAccountName = "";
+                });
+                Navigator.of(context).pop();
+              },
             )
+          ],
         )
     );
   }

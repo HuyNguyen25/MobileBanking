@@ -21,7 +21,6 @@ class AccountInformation extends StatelessWidget {
       width: 80.w,
       height: 50.w,
       child: Container(
-        constraints: BoxConstraints.tight(Size.fromWidth(80.w)),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(

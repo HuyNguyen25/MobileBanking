@@ -175,7 +175,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               SizedBox(height: 2.h),
               SizedBox(
-                height: 16.h,
+                height: 17.h,
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,

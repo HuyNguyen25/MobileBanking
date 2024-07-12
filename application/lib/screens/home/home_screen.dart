@@ -22,7 +22,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class HomeScreenState extends ConsumerState<HomeScreen> {
-  final pb = PocketBase('http://10.0.2.2:8090');
+  final pb = PocketBase(PocketbaseConstants.pocketbasePath);
 
   @override
   void initState() {
@@ -95,9 +95,11 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
           },
         ),
         IconButton(
-          icon: Icon(Icons.mail, color: CustomColors.gray900),
+          icon: Icon(Icons.history, color: CustomColors.gray900),
           onPressed: () async {
-
+            if(context.mounted) {
+              Navigator.pushReplacementNamed(context, "/historyScreen");
+            }
           },
         )
       ],

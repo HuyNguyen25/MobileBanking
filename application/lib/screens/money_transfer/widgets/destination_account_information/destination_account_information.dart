@@ -190,24 +190,23 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
                     destinationAccountId: destinationAccountInformationModel.destinationAccountId,
                     amountOfMoney: double.parse(destinationAccountInformationModel.amountOfTransferMoney)
                   );
-                  
+
+                  //update date and time
+                  setState(() {
+                    destinationAccountInformationModel.date = DateFormat.yMMMMd('en_US').add_jm().format(DateTime.now());
+                  });
+
                   //add the transaction to transactions database
                   await CoreService.addTransaction(
                     transaction: Transaction(
                       sourceAccountId: user!.accountId,
                       destinationAccountId: destinationAccountInformationModel.destinationAccountId,
-                      details: "\$${destinationAccountInformationModel.amountOfTransferMoney} from ${user!.name} to "
+                      details: "${destinationAccountInformationModel.date}: \$${destinationAccountInformationModel.amountOfTransferMoney} from ${user!.name} to "
                           "${destinationAccountInformationModel.destinationAccountName} - title: "
                           "\"${destinationAccountInformationModel.title}\".",
                       amountOfMoney: double.parse(destinationAccountInformationModel.amountOfTransferMoney)
                     )
                   );
-
-                  //hide transfer confirmation
-                  setState(() {
-                    destinationAccountInformationModel.date = DateFormat.yMMMMd('en_US').add_jm().format(DateTime.now());
-                  });
-
                   //show dialog indicating a successful transfer
                   await _showSucessfulTransferDialog();
                 },
@@ -237,10 +236,10 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
         builder: (context) => AlertDialog(
             title: Text("Transfer Completed", style: CustomTextStyles.titleMedium),
             content: Text(
-              "\$${destinationAccountInformationModel.amountOfTransferMoney} to "
+              "${destinationAccountInformationModel.date}: \$${destinationAccountInformationModel.amountOfTransferMoney} to "
                   "${destinationAccountInformationModel.destinationAccountId} (${destinationAccountInformationModel.destinationAccountName}) "
-                  "at ${destinationAccountInformationModel.date} -"
-                  " title: ${destinationAccountInformationModel.title}.",
+                  "-"
+                  " title: \"${destinationAccountInformationModel.title}\".",
               style: CustomTextStyles.titleSmall
             ),
           actions: [

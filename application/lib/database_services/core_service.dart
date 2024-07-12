@@ -64,4 +64,22 @@ class CoreService {
       }
     );
   }
+
+  static Future<List<Transaction>> getTransaction({required String accountId, required int page, required int perPage}) async {
+    final records = await PocketbaseConstants.pocketbaseObject.collection("transactions").getList(
+      page: page,
+      perPage: perPage,
+      sort: "-created",
+      filter: 'source_account_id = "$accountId" || destination_account_id = "$accountId"'
+    );
+    
+    return records.items.map(
+      (item) => Transaction(
+        sourceAccountId: item.getDataValue("source_account_id"),
+        destinationAccountId: item.getDataValue("destination_account_id"),
+        details: item.getDataValue("details"),
+        amountOfMoney: item.getDoubleValue("amount_of_money")
+      )
+    ).toList();
+  }
 }

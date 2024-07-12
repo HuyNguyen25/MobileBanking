@@ -1,3 +1,4 @@
+import 'package:application/constants/pocketbase.dart';
 import 'package:application/database_services/synchronization_service.dart';
 import 'package:application/models/user.dart';
 import 'package:application/screens/home/notifiers/home_screen_notifier.dart';
@@ -19,7 +20,7 @@ class MoneyTransferScreen extends ConsumerStatefulWidget {
 }
 
 class MoneyTransferScreenState extends ConsumerState<MoneyTransferScreen> {
-  final pb = PocketBase('http://10.0.2.2:8090');
+  final pb = PocketBase(PocketbaseConstants.pocketbasePath);
 
   @override
   void initState() {

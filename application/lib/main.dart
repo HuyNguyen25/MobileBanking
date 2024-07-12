@@ -1,4 +1,5 @@
 import 'package:application/screens/authentication/authentication_screen.dart';
+import 'package:application/screens/history/history_screen.dart';
 import 'package:application/screens/home/home_screen.dart';
 import 'package:application/screens/money_transfer/money_transfer_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,8 @@ class MobileBankingApp extends StatelessWidget {
           routes: {
             "/": (context) => AuthenticationScreen(),
             "/homeScreen": (context) => HomeScreen(),
-            "/moneyTransferScreen": (context) => MoneyTransferScreen()
+            "/moneyTransferScreen": (context) => MoneyTransferScreen(),
+            "/historyScreen": (context) => HistoryScreen()
           },
         );
       }

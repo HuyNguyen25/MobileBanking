@@ -46,7 +46,7 @@ class HistoryScreenState extends ConsumerState<HistoryScreen> {
     final user = ref.read(historyScreenNotifier);
     final newTransactions = await CoreService.getTransaction(
       accountId: user!.accountId,
-      page: pageKey~/_pageSize,
+      page: pageKey~/_pageSize + 1,//the first page is page 1
       perPage: _pageSize
     );
 

@@ -43,4 +43,21 @@ class CustomTextFieldStyles {
     hintText: "Title (< 100 characters)",
     icon: Icon(Icons.title, color: Colors.white)
   );
+
+  static final oldPasswordTextFieldDecoration = passwordTextFieldDecoration.copyWith(
+    hintText: "Old Password",
+  );
+
+  static final confirmedNewPasswordTextFieldDecoration = passwordTextFieldDecoration.copyWith(
+    hintText: "Confirm New Password",
+  );
+
+  static final newPasswordTextFieldDecoration = oldPasswordTextFieldDecoration.copyWith(
+    hintText: "New Password"
+  );
+
+  static final emailTextFieldDecoration = accountIdTextFieldDecoration.copyWith(
+    icon: Icon(Icons.email),
+    hintText: "Email"
+  );
 }

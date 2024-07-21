@@ -247,6 +247,16 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                     SizedBox(width: 4.w),
                     CustomHomeScreenItem(title: "Credit Score", iconData: FontAwesomeIcons.star),
                     SizedBox(width: 4.w),
+                    CustomHomeScreenItem(
+                      title: "Security",
+                      iconData: FontAwesomeIcons.shieldHalved,
+                      onTap: () async {
+                        if(context.mounted) {
+                          Navigator.pushReplacementNamed(context, "/settingsScreen");
+                        }
+                      },
+                    ),
+                    SizedBox(width: 4.w),
                     CustomHomeScreenItem(title: "ChatBot", iconData: FontAwesomeIcons.robot),
                     SizedBox(width: 4.w),
                     CustomHomeScreenItem(title: "More", iconData: FontAwesomeIcons.ellipsis),

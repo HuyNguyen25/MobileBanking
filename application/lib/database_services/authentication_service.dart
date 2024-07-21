@@ -21,7 +21,7 @@ class AuthenticationService {
     }
 
     catch(e) {
-      return null; //Indicates signing in not successfully
+      return null; //Indicates signing in is not successful
     }
   }
 

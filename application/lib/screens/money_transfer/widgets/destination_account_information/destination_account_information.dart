@@ -173,7 +173,7 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
               destinationAccountInformationModel.destinationAccountNameVisibility ?
               TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: Colors.black
+                  backgroundColor: Colors.black
                 ),
                 child: Text(
                   "Confirm",
@@ -223,8 +223,8 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-          title: Text("Error!", style: CustomTextStyles.titleMedium),
-          content: Text("Destination account ID may be incorrect.", style: CustomTextStyles.titleSmall)
+        title: Text("Error!", style: CustomTextStyles.titleMedium),
+        content: Text("Destination account ID may be incorrect.", style: CustomTextStyles.titleSmall)
       )
     );
   }
@@ -234,14 +234,14 @@ class DestinationAccountInformationState extends ConsumerState<DestinationAccoun
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-            title: Text("Transfer Completed", style: CustomTextStyles.titleMedium),
-            content: Text(
-              "${destinationAccountInformationModel.date}: \$${destinationAccountInformationModel.amountOfTransferMoney} to "
-                  "${destinationAccountInformationModel.destinationAccountId} (${destinationAccountInformationModel.destinationAccountName}) "
-                  "-"
-                  " title: \"${destinationAccountInformationModel.title}\".",
-              style: CustomTextStyles.titleSmall
-            ),
+          title: Text("Transfer Completed", style: CustomTextStyles.titleMedium),
+          content: Text(
+            "${destinationAccountInformationModel.date}: \$${destinationAccountInformationModel.amountOfTransferMoney} to "
+                "${destinationAccountInformationModel.destinationAccountId} (${destinationAccountInformationModel.destinationAccountName}) "
+                "-"
+                " title: \"${destinationAccountInformationModel.title}\".",
+            style: CustomTextStyles.titleSmall
+          ),
           actions: [
             TextButton(
               child: Text("Dismiss", style: CustomTextStyles.titleMedium.copyWith(fontSize: 14.sp)),

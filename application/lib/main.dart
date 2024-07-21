@@ -2,6 +2,7 @@ import 'package:application/screens/authentication/authentication_screen.dart';
 import 'package:application/screens/history/history_screen.dart';
 import 'package:application/screens/home/home_screen.dart';
 import 'package:application/screens/money_transfer/money_transfer_screen.dart';
+import 'package:application/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sizer/sizer.dart';
@@ -22,7 +23,7 @@ class MobileBankingApp extends StatelessWidget {
           title: 'Mobile Banking App',
           theme: ThemeData(
             colorSchemeSeed: Colors.black,
-            scaffoldBackgroundColor: Colors.white,
+            scaffoldBackgroundColor: Color(0xFFF2EFF3),
             useMaterial3: true,
           ),
           initialRoute: "/",
@@ -30,7 +31,8 @@ class MobileBankingApp extends StatelessWidget {
             "/": (context) => AuthenticationScreen(),
             "/homeScreen": (context) => HomeScreen(),
             "/moneyTransferScreen": (context) => MoneyTransferScreen(),
-            "/historyScreen": (context) => HistoryScreen()
+            "/historyScreen": (context) => HistoryScreen(),
+            '/settingsScreen': (context) => SettingsScreen()
           },
         );
       }
